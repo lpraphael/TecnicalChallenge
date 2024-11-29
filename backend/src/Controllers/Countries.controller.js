@@ -1,26 +1,22 @@
 const countriesService = require("../Services/Countries.service");
+const { StatusCodes } = require("http-status-codes");
 
-const getAvailableCountries = async (_req, res) => {
+const getAvailableCountries = async (_req, res, next) => {
   try {
-    console.log("cheguei aqui");
-
     const response = await countriesService.getAvailableCountries();
-
-    return res.status(200).json(response);
+    return res.status(StatusCodes.OK).json(response);
   } catch (error) {
-    res.status(500).send("Something wrong happened");
+    next(error);
   }
 };
 
-const getCountryInfo = async (req, res) => {
+const getCountryInfo = async (req, res, next) => {
   try {
     const { country } = req.body;
-
     const response = await countriesService.getCountryInfo(country);
-
-    return res.status(200).json(response);
+    return res.status(StatusCodes.OK).json(response);
   } catch (error) {
-    res.status(500).send("Something wrong happened");
+    next(error);
   }
 };
 

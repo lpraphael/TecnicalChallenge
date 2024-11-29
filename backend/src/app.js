@@ -1,5 +1,5 @@
 const express = require("express");
-// const { errorMiddleware } = require("./middlewares/error");
+const { errorMiddleware } = require("./Middlewares/error");
 const cors = require("cors");
 const helmet = require("helmet");
 
@@ -14,6 +14,6 @@ app.use(cors());
 
 app.use("/", countriesRoute);
 
-// app.use(errorMiddleware);
+app.use(errorMiddleware);
 
 module.exports = app;
